@@ -1,0 +1,70 @@
+plugins {
+    id "application"
+    id "org.jetbrains.kotlin.jvm" version "1.5.31"
+}
+
+ext {
+    appTitle = "grean"
+    appVersion = "1.0.0"
+}
+
+group = appTitle
+version = appVersion
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "com.github.ajalt.clikt:clikt:3.3.0"
+    implementation "net.pearx.kasechange:kasechange-jvm:1.3.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.31"
+}
+
+task setup {
+    ext {
+        getPython = { ->
+            if (!org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+                return "python3"
+            }
+            return "python"
+        }
+    }
+
+    doLast {
+        exec {
+            executable getPython()
+            args "setup.py", "--wrapper"
+        }
+    }
+}
+
+application {
+    mainModule = "${appTitle}"
+    mainClass = "${appTitle}.Main"
+}
+
+build {
+    dependsOn setup
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "12"
+    }
+}
+
+jar {
+    manifest {
+        attributes "Implementation-Title": appTitle
+        attributes "Implementation-Version": appVersion
+    }
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_12
+}
+
+startScripts {
+    enabled = false
+}
