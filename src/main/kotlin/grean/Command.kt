@@ -5,6 +5,7 @@ import com.github.ajalt.clikt.parameters.options.default
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.versionOption
 import com.github.ajalt.clikt.parameters.types.choice
+import java.awt.Dimension
 import java.awt.Robot
 import java.awt.Toolkit
 import java.security.SecureRandom
@@ -17,8 +18,8 @@ import kotlin.math.sin
 
 class Command : Clikt(name = Resources.name()) {
     private val pattern: String by option(*PATTERN_NAMES, help = PATTERN_HELP).choice(*PATTERN_CHOICES).default("")
-    private val screen = Toolkit.getDefaultToolkit().screenSize
-    private val robot = Robot()
+    private val screen: Dimension by lazy { Toolkit.getDefaultToolkit().screenSize }
+    private val robot: Robot by lazy { Robot() }
 
     init {
         versionOption(Resources.version(), names = VERSION_NAMES.toSet())
