@@ -5,11 +5,14 @@ plugins {
 
 ext {
     appTitle = "grean"
+    appTarget = "12"
     appVersion = "1.0.0"
 }
 
-group = appTitle
-version = appVersion
+allprojects {
+    group = appTitle
+    version = appVersion
+}
 
 repositories {
     mavenCentral()
@@ -50,7 +53,7 @@ build {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "12"
+        jvmTarget = "${appTarget}"
     }
 }
 
@@ -62,7 +65,7 @@ jar {
 }
 
 java {
-    targetCompatibility = JavaVersion.VERSION_12
+    targetCompatibility = "${appTarget}"
 }
 
 startScripts {
