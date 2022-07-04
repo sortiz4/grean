@@ -11,7 +11,7 @@ WRAPPER_SETUP_TASK = ['rustc', WRAPPER_SRC_PATH, '--out-dir', WRAPPER_DEST_PATH,
 
 class Command:
 
-    def __init__(self):
+    def __init__(self) -> None:
         # Construct the argument parser
         options = {
             'description': 'Prepares the workspace.',
@@ -37,8 +37,8 @@ class Command:
         # Parse the arguments from the system
         self.args = parser.parse_args()
 
-    def handle(self):
-        def wrapper():
+    def handle(self) -> None:
+        def wrapper() -> None:
             # Compile the wrapper
             run(WRAPPER_SETUP_TASK)
 
