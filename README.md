@@ -1,5 +1,5 @@
 # Grean
-What are you really up to?
+Stay grean.
 
 ## Requirements
 - Linux, MacOS, or Windows
