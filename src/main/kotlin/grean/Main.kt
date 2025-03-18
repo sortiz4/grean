@@ -1,5 +1,6 @@
 package grean
 
+import com.github.ajalt.clikt.core.main
 import kotlin.system.exitProcess
 
 class Main {

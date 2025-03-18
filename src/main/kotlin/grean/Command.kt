@@ -6,6 +6,7 @@ import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.versionOption
 import com.github.ajalt.clikt.parameters.types.choice
 import java.awt.Dimension
+import java.awt.MouseInfo
 import java.awt.Robot
 import java.awt.Toolkit
 import java.security.SecureRandom
@@ -29,9 +30,11 @@ class Command : Clikt(name = Resources.name()) {
         when (Pattern.from(pattern)) {
             Pattern.BOW -> bow()
             Pattern.SCAN -> scan()
+            Pattern.CIRCLE -> circle()
             Pattern.RANDOM -> random()
             Pattern.SCREEN -> screen()
-            else -> circle()
+            Pattern.SUBTLE -> subtle()
+            else -> subtle()
         }
     }
 
@@ -112,7 +115,7 @@ class Command : Clikt(name = Resources.name()) {
         }
 
         while (true) {
-            for (a in 0..(360 - 1) step rate) {
+            for (a in 0..<360 step rate) {
                 throttle {
                     robot.mouseMove((x + r * cos(degreesToRadians(a.toDouble()))).roundToInt(), (y + r * sin(degreesToRadians(a.toDouble()))).roundToInt())
                 }
@@ -171,6 +174,21 @@ class Command : Clikt(name = Resources.name()) {
                     2 -> goLeft()
                     3 -> goUp()
                 }
+            }
+        }
+    }
+
+    private fun subtle(rate: Int = 1000) {
+        val random = SecureRandom()
+
+        fun getNextPosition(current: Int): Int {
+            return current + random.nextInt(-1, 2)
+        }
+
+        while (true) {
+            throttle(rate) {
+                val location = MouseInfo.getPointerInfo().location
+                robot.mouseMove(getNextPosition(location.x), getNextPosition(location.y))
             }
         }
     }
