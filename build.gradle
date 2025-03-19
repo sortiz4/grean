@@ -6,7 +6,7 @@ plugins {
 ext {
     appTitle = "grean"
     appTarget = "21"
-    appVersion = "2.0.0"
+    appVersion = "2.0.5"
 }
 
 allprojects {

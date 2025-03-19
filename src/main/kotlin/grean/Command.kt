@@ -206,7 +206,7 @@ class Command : Clikt(name = Resources.name()) {
         private val VERSION_NAMES = arrayOf("--version", "-v")
 
         // Help messages
-        private const val PATTERN_HELP = "The pattern to move the mouse in."
+        private const val PATTERN_HELP = "The pattern to move the mouse in"
 
         // Extra options
         private val PATTERN_CHOICES = Pattern.names()
