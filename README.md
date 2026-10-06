@@ -6,10 +6,9 @@ What are you up to?
 - Java 21
 
 ## Compilation
-- Java SDK 23
-- Gradle 8.13
-- Python 3.13
-- Rust 1.85
+- Java SDK 27
+- Gradle 9.8.0
+- Rust 1.99.0
 
 Run `gradle build` and unarchive a distribution in `./build/distributions/`.
 

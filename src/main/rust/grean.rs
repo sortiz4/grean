@@ -23,10 +23,12 @@ fn main() {
 
     // Construct the arguments
     let default_arguments = &[
+        "--enable-native-access", "ALL-UNNAMED",
         "--module-path", module_path.to_str().unwrap(),
         "-classpath", &class_path,
         "grean.Main",
     ];
+
     let merged_arguments = {
         default_arguments
             .iter()

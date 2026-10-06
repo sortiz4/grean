@@ -94,6 +94,7 @@ class Command : Clikt(name = Resources.name()) {
                             robot.mouseMove(x, y)
                         }
                     }
+
                     false -> for (x in screen.width downTo 0 step rate) {
                         throttle {
                             robot.mouseMove(x, y)
@@ -187,7 +188,7 @@ class Command : Clikt(name = Resources.name()) {
 
         while (true) {
             throttle(rate) {
-                val location = MouseInfo.getPointerInfo().location
+                val location = MouseInfo.getPointerInfo()?.location ?: return@throttle
                 robot.mouseMove(getNextPosition(location.x), getNextPosition(location.y))
             }
         }
